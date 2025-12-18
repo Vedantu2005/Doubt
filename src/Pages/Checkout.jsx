@@ -34,17 +34,14 @@ const loadSquareSdk = () => {
 };
 
 // --- Helpers ---
+
 const getUserId = () => {
-    const storedUserId = localStorage.getItem("userId");
-    if (storedUserId) {
-        try {
-            const parsed = JSON.parse(storedUserId);
-            return parsed.uid || parsed.id || storedUserId;
-        } catch (err) {
-            return storedUserId;
-        }
+    try {
+        const storedUser = localStorage.getItem('user'); // Changed from 'userId'
+        return storedUser ? JSON.parse(storedUser).uid : null;
+    } catch (e) {
+        return null;
     }
-    return null;
 };
 
 const generateOrderId = () => Math.floor(100000 + Math.random() * 900000);
